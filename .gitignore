@@ -1,0 +1,11 @@
+
+
+.next
+node_modules
+.env.local
+.env.production.local
+.env
+*.log
+
+next-env.d.ts
+

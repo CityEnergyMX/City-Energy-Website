@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { MapPin, Search, Filter, Clock, Navigation2, Locate, Info, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
 import dynamic from "next/dynamic"
 import "leaflet/dist/leaflet.css"
 import "./fix-leaflet-icons"
@@ -173,12 +174,14 @@ export default function MapaPage() {
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Zap className="h-8 w-8 text-accent fill-accent" />
-            <div>
-              <h1 className="text-xl font-bold text-secondary leading-none">CITY</h1>
-              <p className="text-sm text-accent font-bold leading-none">ENERGY</p>
-            </div>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logos/LOGO_CE.png"
+              alt="CITY ENERGY Logo"
+              width={150}
+              height={40}
+              className="h-10 w-auto"
+            />
           </Link>
           <Link href="/">
             <Button variant="outline">Volver al inicio</Button>
@@ -188,7 +191,7 @@ export default function MapaPage() {
 
       <div className="flex flex-col md:flex-row h-[calc(100vh-73px)]">
         {/* Sidebar */}
-        <div className="w-full md:w-96 bg-card border-r overflow-y-auto max-h-[50vh] md:max-h-full">
+        <div className="w-full md:w-96 bg-card border-r overflow-y-auto h-auto md:h-full">
           <div className="p-6 space-y-6">
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -389,7 +392,7 @@ export default function MapaPage() {
         </div>
 
         {/* Map */}
-        <div className="flex-1 relative bg-muted/30 min-h-[50vh] md:min-h-0 px-4 pb-4 md:px-0 md:pb-0">
+        <div className="flex-1 relative bg-muted/30 h-[60vh] md:h-auto px-4 pb-4 md:px-0 md:pb-0">
           <div className="h-full w-full overflow-hidden rounded-2xl border bg-card shadow-sm md:rounded-none md:border-0 md:bg-transparent md:shadow-none">
             <MapContainer
               center={mapCenter}

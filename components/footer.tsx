@@ -1,4 +1,5 @@
 import { Zap, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -6,12 +7,14 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Zap className="h-8 w-8 text-accent fill-accent" />
-              <div>
-                <div className="text-xl font-bold">CITY</div>
-                <div className="text-xs text-secondary-foreground/70">ENERGY</div>
-              </div>
+            <div className="flex items-center">
+              <Image
+                src="/logos/c1_Mesa de trabajo 1.png"
+                alt="CITY ENERGY Logo"
+                width={150}
+                height={40}
+                className="h-10 w-auto brightness-0 invert"
+              />
             </div>
             <p className="text-sm text-secondary-foreground/70 leading-relaxed">
               Liderando la revolución de la movilidad eléctrica con tecnología inteligente y sostenible.

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Smartphone, Zap, MapPin, Clock, X } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
 
 export function Hero() {
@@ -10,10 +11,18 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-background">
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-secondary/5 to-transparent" />
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/header-background.jpeg')" }}
+      />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-background/90" />
+      
+      {/* Decorative Elements */}
       <div className="absolute top-20 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" />
       <div
-        className="absolute bottom-20 left-20 w-72 h-72 bg-secondary/10 rounded-full blur-3xl animate-pulse"
+        className="absolute bottom-20 left-20 w-72 h-72 bg-accent/20 rounded-full blur-3xl animate-pulse"
         style={{ animationDelay: "1s" }}
       />
 
@@ -26,23 +35,25 @@ export function Hero() {
       <div className="container relative mx-auto px-4 py-20">
         <div className="max-w-5xl mx-auto text-center space-y-12">
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2 text-sm font-medium text-secondary">
+            <div className="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 rounded-full px-4 py-2 text-sm font-medium text-white">
               <Zap className="h-4 w-4 text-accent fill-accent" />
               Carga rápida en toda la ciudad
             </div>
 
-            <img
-              src="/logos/LOGO_VERDE.png"
+            <Image
+              src="/logos/c1_Mesa de trabajo 1.png"
               alt="CITY ENERGY Logo"
-              className="h-16 lg:h-20 mx-auto"
+              width={300}
+              height={80}
+              className="h-16 lg:h-20 w-auto mx-auto brightness-0 invert"
             />
 
             <div className="space-y-6">
               <h2 className="text-5xl lg:text-8xl font-bold leading-tight">
-                <span className="text-secondary">Electrificando tu </span>
+                <span className="text-white">Electrificando tu </span>
                 <span className="text-accent animate-pulse">{"manejo"}</span>
               </h2>
-              <p className="text-xl lg:text-2xl text-muted-foreground leading-relaxed text-pretty max-w-3xl mx-auto">
+              <p className="text-xl lg:text-2xl text-white/90 leading-relaxed text-pretty max-w-3xl mx-auto">
                 Carga inteligente, rápida y confiable. Encuentra tu estación más cercana y carga tu auto eléctrico en
                 minutos.
               </p>
@@ -61,7 +72,7 @@ export function Hero() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-2 bg-transparent text-lg px-8 py-6 hover:bg-secondary/5"
+                  className="border-2 border-white/30 bg-transparent text-white text-lg px-8 py-6 hover:bg-white/10"
                 >
                   <MapPin className="mr-2 h-5 w-5" />
                   Ver estaciones

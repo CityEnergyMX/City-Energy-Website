@@ -59,7 +59,7 @@ export function FinalCTA() {
             </div>
             <div className="h-12 w-px bg-secondary-foreground/20" />
             <div className="text-center">
-              <div className="text-3xl font-bold">2M+</div>
+              <div className="text-3xl font-bold">100k+</div>
               <div className="text-sm text-secondary-foreground/70">Cargas realizadas</div>
             </div>
           </div>

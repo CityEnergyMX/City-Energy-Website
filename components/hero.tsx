@@ -84,14 +84,14 @@ export function Hero() {
               <div className="bg-card/50 backdrop-blur-sm border rounded-xl p-4 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-2 mb-1 justify-center">
                   <MapPin className="h-4 w-4 text-accent" />
-                  <div className="text-3xl font-bold text-secondary">500+</div>
+                  <div className="text-3xl font-bold text-secondary">70+</div>
                 </div>
-                <div className="text-sm text-muted-foreground">Estaciones</div>
+                <div className="text-sm text-muted-foreground">Conectores</div>
               </div>
               <div className="bg-card/50 backdrop-blur-sm border rounded-xl p-4 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-2 mb-1 justify-center">
                   <Zap className="h-4 w-4 text-accent" />
-                  <div className="text-3xl font-bold text-secondary">50K+</div>
+                  <div className="text-3xl font-bold text-secondary">6k+</div>
                 </div>
                 <div className="text-sm text-muted-foreground">Usuarios</div>
               </div>

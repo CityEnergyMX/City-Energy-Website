@@ -15,6 +15,21 @@ const TileLayer = dynamic(() => import("react-leaflet").then((mod) => mod.TileLa
 const Marker = dynamic(() => import("react-leaflet").then((mod) => mod.Marker), { ssr: false })
 const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), { ssr: false })
 
+const createStationIcon = (isSelected: boolean) => {
+  if (typeof window === "undefined") return undefined
+  const L = require("leaflet")
+  return new L.Icon({
+    iconUrl: isSelected
+      ? "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png"
+      : "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    iconSize: isSelected ? [30, 48] : [25, 41],
+    iconAnchor: isSelected ? [15, 48] : [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  })
+}
+
 export default function MapaPage() {
   const [selectedStation, setSelectedStation] = useState<number | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
@@ -189,9 +204,9 @@ export default function MapaPage() {
         </div>
       </header>
 
-      <div className="flex flex-col md:flex-row h-[calc(100vh-73px)]">
+      <div className="flex flex-col md:flex-row md:h-[calc(100vh-73px)]">
         {/* Sidebar */}
-        <div className="w-full md:w-96 bg-card border-r overflow-y-auto h-auto md:h-full">
+        <div className="w-full md:w-96 bg-card border-r overflow-y-auto md:h-full">
           <div className="p-6 space-y-6">
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -392,7 +407,7 @@ export default function MapaPage() {
         </div>
 
         {/* Map */}
-        <div className="flex-1 relative bg-muted/30 h-[60vh] md:h-auto px-4 pb-4 md:px-0 md:pb-0">
+        <div className="w-full md:flex-1 relative bg-muted/30 h-[70vh] md:h-auto px-4 pb-4 pt-4 md:px-0 md:pb-0 md:pt-0">
           <div className="h-full w-full overflow-hidden rounded-2xl border bg-card shadow-sm md:rounded-none md:border-0 md:bg-transparent md:shadow-none">
             <MapContainer
               center={mapCenter}
@@ -404,18 +419,21 @@ export default function MapaPage() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {filteredStations.map((station) => (
-                <Marker
-                  key={station.id}
-                  position={[station.lat, station.lng]}
-                  eventHandlers={{
-                    click: () => {
-                      setSelectedStation(station.id)
-                      setMapCenter([station.lat, station.lng])
-                      setMapZoom(15)
-                    },
-                  }}
-                >
+              {filteredStations.map((station) => {
+                const isSelected = selectedStation === station.id
+                return (
+                  <Marker
+                    key={station.id}
+                    position={[station.lat, station.lng]}
+                    icon={createStationIcon(isSelected)}
+                    eventHandlers={{
+                      click: () => {
+                        setSelectedStation(station.id)
+                        setMapCenter([station.lat, station.lng])
+                        setMapZoom(15)
+                      },
+                    }}
+                  >
                   <Popup>
                     <div className="p-2">
                       <h3 className="font-bold text-sm mb-1">{station.name}</h3>
@@ -445,7 +463,8 @@ export default function MapaPage() {
                     </div>
                   </Popup>
                 </Marker>
-              ))}
+                )
+              })}
             </MapContainer>
           </div>
         </div>

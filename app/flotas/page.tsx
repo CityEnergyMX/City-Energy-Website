@@ -70,38 +70,52 @@ export default function FlotasPage() {
   const plans = [
     {
       name: "Flota Pequeña",
-      vehicles: "5-20 vehículos",
-      price: "Desde $299/mes",
+      vehicles: "50-200 vehículos",
+      price: "Descuento 5%",
       features: [
         "Dashboard básico de monitoreo",
         "Facturación mensual unificada",
-        "Tarifas preferenciales -15%",
+        "Tarifas preferenciales - 5%",
         "Soporte por email",
         "Reportes mensuales",
       ],
     },
     {
       name: "Flota Mediana",
-      vehicles: "21-100 vehículos",
-      price: "Desde $899/mes",
+      vehicles: "200-500 vehículos",
+      price: "Descuento 8%",
       features: [
-        "Dashboard avanzado con IA",
-        "Facturación por centro de costos",
-        "Tarifas preferenciales -25%",
+        "Dashboard básico de monitoreo",
+        "Facturación mensual unificada",
+        "Tarifas preferenciales - 8%",
+        "Soporte por email",
+        "Reportes mensuales",
         "Asesor dedicado",
-        "Reportes semanales",
-        "Reserva de estaciones",
-        "API de integración",
       ],
       featured: true,
     },
     {
       name: "Flota Corporativa",
-      vehicles: "100+ vehículos",
-      price: "Personalizado",
+      vehicles: "500-1000 vehículos",
+      price: "Descuento 10%",
       features: [
-        "Todo lo de Flota Mediana",
-        "Tarifas preferenciales -35%",
+        "Dashboard avanzado con IA",
+        "Facturación por centro de costos",
+        "Tarifas preferenciales - 10%",
+        "Soporte por email",
+        "Reportes semanales",
+        "Asesor dedicado",
+        "Cajones prioritarios",
+      ],
+    },
+    {
+      name: "Grandes Consumidores",
+      vehicles: ">1000 vehículos",
+      price: "Descuento 15%",
+      features: [
+        "Dashboard avanzado con IA",
+        "Facturación por centro de costos",
+        "Tarifas preferenciales - 15%",
         "Estaciones privadas opcionales",
         "Soporte 24/7 prioritario",
         "Reportes personalizados",
@@ -168,7 +182,7 @@ export default function FlotasPage() {
                 <div className="text-sm text-muted-foreground">Menos emisiones</div>
               </div>
               <div className="bg-card border rounded-xl p-6">
-                <div className="text-4xl font-bold text-accent mb-2">500+</div>
+                <div className="text-4xl font-bold text-accent mb-2">50+</div>
                 <div className="text-sm text-muted-foreground">Empresas confían en nosotros</div>
               </div>
             </div>
@@ -213,12 +227,12 @@ export default function FlotasPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {plans.map((plan, index) => (
               <div
                 key={index}
-                className={`bg-card border rounded-2xl p-8 ${
-                  plan.featured ? "ring-2 ring-accent shadow-xl scale-105" : ""
+                className={`bg-card border rounded-2xl p-8 flex flex-col min-h-[520px] ${
+                  plan.featured ? "ring-2 ring-accent shadow-xl" : ""
                 }`}
               >
                 {plan.featured && (
@@ -230,7 +244,7 @@ export default function FlotasPage() {
                 <div className="text-muted-foreground mb-4">{plan.vehicles}</div>
                 <div className="text-4xl font-bold text-secondary mb-6">{plan.price}</div>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 flex-1">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <CheckCircle className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
@@ -256,7 +270,7 @@ export default function FlotasPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
+      <section id="contacto" className="py-20">
         <div className="container mx-auto px-4">
           <div className="bg-gradient-to-br from-accent/10 to-secondary/10 rounded-3xl p-12 lg:p-16 text-center max-w-4xl mx-auto">
             <Zap className="h-16 w-16 text-accent mx-auto mb-6" />

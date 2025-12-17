@@ -1,4 +1,4 @@
-import { Zap, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import { Zap, Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from "lucide-react"
 import Image from "next/image"
 
 export function Footer() {
@@ -20,16 +20,13 @@ export function Footer() {
               Liderando la revolución de la movilidad eléctrica con tecnología inteligente y sostenible.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="bg-secondary-foreground/10 p-2 rounded-lg hover:bg-accent/20 transition-colors">
+              <a href="https://www.facebook.com/profile.php?id=61564133381110" target="_blank" rel="noopener noreferrer" className="bg-secondary-foreground/10 p-2 rounded-lg hover:bg-accent/20 transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="bg-secondary-foreground/10 p-2 rounded-lg hover:bg-accent/20 transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="https://www.instagram.com/cityenergymx/?hl=es" target="_blank" rel="noopener noreferrer" className="bg-secondary-foreground/10 p-2 rounded-lg hover:bg-accent/20 transition-colors">
+              <a href="https://www.instagram.com/cityenergymx/?next=%2F" target="_blank" rel="noopener noreferrer" className="bg-secondary-foreground/10 p-2 rounded-lg hover:bg-accent/20 transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="https://www.linkedin.com/company/city-energy-m-xico/?originalSubdomain=mx" target="_blank" rel="noopener noreferrer" className="bg-secondary-foreground/10 p-2 rounded-lg hover:bg-accent/20 transition-colors">
+              <a href="https://www.linkedin.com/company/city-energy-m-xico/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BMRmaeugeTX2J96QUADmFPg%3D%3D" target="_blank" rel="noopener noreferrer" className="bg-secondary-foreground/10 p-2 rounded-lg hover:bg-accent/20 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
@@ -93,11 +90,11 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-secondary-foreground/70">
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-0.5 text-accent" />
-                <span>hola@cityenergy.com</span>
+                <span>ventas@cityenergy.com.mx</span>
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="h-4 w-4 mt-0.5 text-accent" />
-                <span>+52 55 1234 5678</span>
+                <span>55 6146 6203</span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 mt-0.5 text-accent" />

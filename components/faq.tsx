@@ -15,7 +15,7 @@ export function FAQ() {
     {
       question: "¿Cuáles son las formas de pago disponibles?",
       answer:
-        "Aceptamos tarjetas de crédito y débito, wallets digitales (Apple Pay, Google Pay) y pagos directos desde la app con saldo precargado.",
+        "Aceptamos tarjetas de crédito y débito y pagos directos desde la app con saldo precargado.",
     },
     {
       question: "¿Qué hago si una estación no funciona?",

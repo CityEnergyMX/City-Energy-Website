@@ -14,6 +14,32 @@ const TileLayer = dynamic(() => import("react-leaflet").then((mod) => mod.TileLa
 const Marker = dynamic(() => import("react-leaflet").then((mod) => mod.Marker), { ssr: false })
 const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), { ssr: false })
 
+const createCustomIcon = (isNearest: boolean) => {
+  if (typeof window === "undefined") return undefined
+  const L = require("leaflet")
+  
+  if (isNearest) {
+    return new L.Icon({
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+      iconSize: [30, 48],
+      iconAnchor: [15, 48],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    })
+  }
+  
+  // Icono azul normal para las demás estaciones
+  return new L.Icon({
+    iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  })
+}
+
 export function StationsMap() {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null)
   const [isLoadingLocation, setIsLoadingLocation] = useState(false)
@@ -57,7 +83,7 @@ export function StationsMap() {
     : [stations[0].lat, stations[0].lng]
 
   const stationsToRender = useMemo(() => {
-    const base = stations.slice(0, 5)
+    const base = stations.slice(0, 10)
     if (!nearestStation) return base
     const exists = base.some((s) => s.id === nearestStation.station.id)
     return exists ? base : [...base, nearestStation.station]
@@ -117,28 +143,38 @@ export function StationsMap() {
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-4xl font-bold text-secondary">Encuentra tu estación más cercana</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ve un adelanto del mapa y abre la experiencia completa para navegar y obtener direcciones.
+            Más de 70 conectores disponibles en todo el país
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6 items-stretch">
           <div className="lg:col-span-2 relative rounded-2xl overflow-hidden shadow-xl bg-card border">
             <div className="h-[360px] sm:h-[420px]">
-              <MapContainer center={mapCenter} zoom={nearestStation ? 12 : 5} className="w-full h-full">
+              <MapContainer center={mapCenter} zoom={nearestStation ? 6 : 5} className="w-full h-full">
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {stationsToRender.map((station) => (
-                  <Marker key={station.id} position={[station.lat, station.lng]}>
-                    <Popup>
-                      <div className="p-2">
-                        <div className="font-semibold text-sm">{station.name}</div>
-                        <div className="text-xs text-muted-foreground">{station.address}</div>
-                      </div>
-                    </Popup>
-                  </Marker>
-                ))}
+                {stationsToRender.map((station) => {
+                  const isNearest = nearestStation?.station.id === station.id
+                  return (
+                    <Marker
+                      key={station.id}
+                      position={[station.lat, station.lng]}
+                      icon={createCustomIcon(isNearest)}
+                    >
+                      <Popup>
+                        <div className="p-2">
+                          <div className="font-semibold text-sm">
+                            {station.name}
+                            {isNearest && <span className="text-accent ml-2">⚡ Más cercana</span>}
+                          </div>
+                          <div className="text-xs text-muted-foreground">{station.address}</div>
+                        </div>
+                      </Popup>
+                    </Marker>
+                  )
+                })}
               </MapContainer>
             </div>
             <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-3">

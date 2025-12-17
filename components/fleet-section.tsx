@@ -18,7 +18,7 @@ export function FleetSection() {
     {
       icon: Shield,
       title: "Acceso prioritario",
-      description: "Cargadores reservados para tu flota en estaciones clave",
+      description: "Espacios en nuestras estaciones con prioridad para flotas",
     },
     {
       icon: Zap,
@@ -33,7 +33,7 @@ export function FleetSection() {
     {
       icon: MapPin,
       title: "Red extendida",
-      description: "Acceso a más de 500 estaciones en toda la ciudad",
+      description: "Acceso a la mayor red de carga en el país",
     },
   ]
 
@@ -125,9 +125,11 @@ export function FleetSection() {
                 Ver detalles completos
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="bg-background text-secondary hover:bg-accent hover:text-accent-foreground">
-              Hablar con un asesor
-            </Button>
+            <Link href="/flotas#contacto">
+              <Button size="lg" variant="outline" className="bg-background text-secondary hover:bg-accent hover:text-accent-foreground">
+                Hablar con un asesor
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

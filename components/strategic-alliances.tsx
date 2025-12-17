@@ -5,14 +5,14 @@ export function StrategicAlliances() {
   const alliances = [
     {
       icon: Car,
-      name: "Tesla",
-      description: "15% de descuento en todas las cargas para empleados Tesla",
+      name: "OCN",
+      description: "Descuento en todas las cargas para usuarios One Car Now registrados",
       logo: "/logos/LOGO_AZUL.png",
     },
     {
       icon: Building2,
-      name: "BMW",
-      description: "20% de descuento + acceso prioritario a estaciones rápidas",
+      name: "Didi",
+      description: "Descuento en todas las cargas para drivers registrados en Didi, aplica términos y condiciones",
       logo: "/logos/LOGO_AZUL.png",
     },
   ]

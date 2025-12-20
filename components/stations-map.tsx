@@ -83,7 +83,8 @@ export function StationsMap() {
     : [stations[0].lat, stations[0].lng]
 
   const stationsToRender = useMemo(() => {
-    const base = stations.slice(0, 10)
+    const base = stations.filter((s) => s.status === "available")
+
     if (!nearestStation) return base
     const exists = base.some((s) => s.id === nearestStation.station.id)
     return exists ? base : [...base, nearestStation.station]

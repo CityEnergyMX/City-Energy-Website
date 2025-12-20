@@ -5,15 +5,15 @@ export function StrategicAlliances() {
   const alliances = [
     {
       icon: Car,
-      name: "OCN",
-      description: "Descuento en todas las cargas para usuarios One Car Now registrados",
-      logo: "/logos/LOGO_AZUL.png",
+      name: "",
+      description: "Descuento en todas las cargas para usuarios OneCarNow registrados",
+      logo: "/logos/ocn-logo.webp",
     },
     {
       icon: Building2,
-      name: "Didi",
+      name: "",
       description: "Descuento en todas las cargas para drivers registrados en Didi, aplica términos y condiciones",
-      logo: "/logos/LOGO_AZUL.png",
+      logo: "/logos/didi-logo.gif",
     },
   ]
 
@@ -39,14 +39,20 @@ export function StrategicAlliances() {
               className="group bg-card hover:bg-accent/5 p-8 rounded-2xl border hover:border-accent/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
             >
               <div className="flex flex-col items-center text-center space-y-4">
-                <div className="relative">
+                {/* <div className="relative">
                   <div className="absolute inset-0 bg-accent/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                   <alliance.icon className="relative h-16 w-16 text-accent group-hover:scale-110 transition-transform" />
-                </div>
+                </div> */}
                 <div className="relative h-10 w-[180px]">
-                  <Image src={alliance.logo} alt={`${alliance.name} logo`} fill className="object-contain" />
+                  <Image 
+                    src={alliance.logo} 
+                    alt={`${alliance.name} logo`} 
+                    width={180}
+                    height={10}
+                    className="object-contain "
+                  />
                 </div>
-                <div>
+                <div className="mt-6">
                   <h3 className="font-bold text-secondary text-xl mb-2">{alliance.name}</h3>
                   <p className="text-base text-muted-foreground leading-relaxed">{alliance.description}</p>
                 </div>

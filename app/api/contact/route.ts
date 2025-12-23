@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 import { z } from "zod"
-import { ContactLeadEmail } from "@/emails/contact-lead-email"
+import ContactLeadEmail from "@/emails/contact-lead-email"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     const { data, error } = await resend.emails.send({
       from,
       to: [to],
-      subject: `${tipoLabels[validatedData.tipo]} - ${validatedData.nombre}`,
+      subject: `Nueva solicitud de contacto | CityEnergy | ${validatedData.nombre}`,
       react: ContactLeadEmail({
         tipo: validatedData.tipo,
         nombre: validatedData.nombre,

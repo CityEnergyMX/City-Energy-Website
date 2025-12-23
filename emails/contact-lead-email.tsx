@@ -6,6 +6,7 @@ import {
   Heading,
   Hr,
   Html,
+  Img,
   Preview,
   Section,
   Text,
@@ -25,13 +26,20 @@ export interface ContactLeadEmailProps {
 }
 
 const tipoLabels: Record<ContactEmailTipo, string> = {
+  demo: "Nueva solicitud de contacto",
+  asesor: "Nueva solicitud de contacto",
+  consulta: "Nueva solicitud de contacto",
+  plan: "Nueva solicitud de contacto",
+}
+
+const tipoSubtitles: Record<ContactEmailTipo, string> = {
   demo: "Solicitud de Demo",
-  asesor: "Hablar con Asesor",
+  asesor: "Solicitud de Asesoría",
   consulta: "Agendar Consulta",
   plan: "Contratar Plan",
 }
 
-export function ContactLeadEmail({ tipo, nombre, email, telefono, empresa, mensaje, fecha }: ContactLeadEmailProps) {
+export default function ContactLeadEmail({ tipo, nombre, email, telefono, empresa, mensaje, fecha }: ContactLeadEmailProps) {
   const title = tipoLabels[tipo]
 
   return (
@@ -42,8 +50,15 @@ export function ContactLeadEmail({ tipo, nombre, email, telefono, empresa, mensa
         <Body className="bg-slate-50 font-sans text-slate-900">
           <Container className="mx-auto my-8 w-full max-w-[600px] overflow-hidden rounded-xl border border-slate-200 bg-white">
             <Section className="bg-lime-600 px-8 py-6 text-center text-white">
-              <Heading className="m-0 text-2xl font-bold">CITY ENERGY</Heading>
+              <Img
+                src="https://www.cityenergy.com.mx/logos/LOGO_C3.jpg"
+                alt="CITY ENERGY"
+                width="300"
+                height="100"
+                style={{ margin: '0 auto 20px', display: 'block', borderRadius: '8px' }}
+              />
               <Text className="m-0 mt-2 text-base opacity-90">{title}</Text>
+              <Text className="m-0 mt-1 text-sm opacity-75">{tipoSubtitles[tipo]}</Text>
             </Section>
 
             <Section className="px-8 py-6">

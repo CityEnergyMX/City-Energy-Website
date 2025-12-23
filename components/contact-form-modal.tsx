@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -10,6 +11,14 @@ import {
 } from "@/components/ui/dialog"
 import { Loader2, CheckCircle2 } from "lucide-react"
 
+interface FormData {
+  nombre: string
+  telefono: string
+  email: string
+  empresa: string
+  mensaje: string
+}
+
 interface ContactFormModalProps {
   isOpen: boolean
   onClose: () => void
@@ -18,14 +27,14 @@ interface ContactFormModalProps {
 }
 
 export function ContactFormModal({ isOpen, onClose, tipo, planName }: ContactFormModalProps) {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    telefono: "",
-    email: "",
-    empresa: "",
-    mensaje: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<FormData>({
+    mode: "onTouched",
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState("")
 
@@ -36,9 +45,7 @@ export function ContactFormModal({ isOpen, onClose, tipo, planName }: ContactFor
     plan: `Contratar Plan${planName ? `: ${planName}` : ""}`,
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  const onSubmit = async (formData: FormData) => {
     setError("")
 
     try {
@@ -64,12 +71,10 @@ export function ContactFormModal({ isOpen, onClose, tipo, planName }: ContactFor
       setTimeout(() => {
         onClose()
         setIsSuccess(false)
-        setFormData({ nombre: "", telefono: "", email: "", empresa: "", mensaje: "" })
+        reset()
       }, 3000)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al enviar la solicitud")
-    } finally {
-      setIsSubmitting(false)
     }
   }
 
@@ -90,19 +95,28 @@ export function ContactFormModal({ isOpen, onClose, tipo, planName }: ContactFor
               <DialogTitle className="text-2xl font-bold text-secondary">{titles[tipo]}</DialogTitle>
             </DialogHeader>
 
-            <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-4">
               <div>
                 <label className="block text-sm font-medium mb-2">
                   Nombre completo <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
-                  required
-                  value={formData.nombre}
-                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
+                  {...register("nombre", {
+                    required: "El nombre es obligatorio",
+                    minLength: {
+                      value: 2,
+                      message: "El nombre debe tener al menos 2 caracteres",
+                    },
+                  })}
+                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background ${
+                    errors.nombre ? "border-red-500" : ""
+                  }`}
                   placeholder="Juan Pérez"
                 />
+                {errors.nombre && (
+                  <p className="text-red-500 text-sm mt-1">{errors.nombre.message}</p>
+                )}
               </div>
 
               <div>
@@ -111,12 +125,27 @@ export function ContactFormModal({ isOpen, onClose, tipo, planName }: ContactFor
                 </label>
                 <input
                   type="tel"
-                  required
-                  value={formData.telefono}
-                  onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
-                  placeholder="55 1234 5678"
+                  {...register("telefono", {
+                    required: "El teléfono es obligatorio",
+                    pattern: {
+                      value: /^[0-9]{10,14}$/,
+                      message: "El teléfono debe contener solo números (10-14 dígitos)",
+                    },
+                  })}
+                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background ${
+                    errors.telefono ? "border-red-500" : ""
+                  }`}
+                  placeholder="5512345678"
+                  maxLength={14}
+                  onKeyPress={(e) => {
+                    if (!/[0-9]/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
                 />
+                {errors.telefono && (
+                  <p className="text-red-500 text-sm mt-1">{errors.telefono.message}</p>
+                )}
               </div>
 
               <div>
@@ -125,20 +154,28 @@ export function ContactFormModal({ isOpen, onClose, tipo, planName }: ContactFor
                 </label>
                 <input
                   type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
+                  {...register("email", {
+                    required: "El email es obligatorio",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Email inválido",
+                    },
+                  })}
+                  className={`w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background ${
+                    errors.email ? "border-red-500" : ""
+                  }`}
                   placeholder="juan@empresa.com"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                )}
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-2">Empresa</label>
                 <input
                   type="text"
-                  value={formData.empresa}
-                  onChange={(e) => setFormData({ ...formData, empresa: e.target.value })}
+                  {...register("empresa")}
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background"
                   placeholder="Mi Empresa S.A."
                 />
@@ -147,8 +184,7 @@ export function ContactFormModal({ isOpen, onClose, tipo, planName }: ContactFor
               <div>
                 <label className="block text-sm font-medium mb-2">Mensaje (opcional)</label>
                 <textarea
-                  value={formData.mensaje}
-                  onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
+                  {...register("mensaje")}
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-background resize-none"
                   rows={3}
                   placeholder="Cuéntanos más sobre tus necesidades..."

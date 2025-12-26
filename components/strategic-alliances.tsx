@@ -3,12 +3,12 @@ import Image from "next/image"
 
 export function StrategicAlliances() {
   const alliances = [
-    {
-      icon: Car,
-      name: "",
-      description: "Descuento en todas las cargas para usuarios OneCarNow registrados",
-      logo: "/logos/ocn-logo.webp",
-    },
+    // {
+    //   icon: Car,
+    //   name: "",
+    //   description: "Descuento en todas las cargas para usuarios OneCarNow registrados",
+    //   logo: "/logos/ocn-logo.webp",
+    // },
     {
       icon: Building2,
       name: "",
@@ -32,17 +32,15 @@ export function StrategicAlliances() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {/* <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"> */}
+        <div className="grid  gap-8 max-w-xl mx-auto">
+
           {alliances.map((alliance, index) => (
             <div
               key={index}
               className="group bg-card hover:bg-accent/5 p-8 rounded-2xl border hover:border-accent/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
             >
               <div className="flex flex-col items-center text-center space-y-4">
-                {/* <div className="relative">
-                  <div className="absolute inset-0 bg-accent/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <alliance.icon className="relative h-16 w-16 text-accent group-hover:scale-110 transition-transform" />
-                </div> */}
                 <div className="relative h-10 w-[180px]">
                   <Image 
                     src={alliance.logo} 

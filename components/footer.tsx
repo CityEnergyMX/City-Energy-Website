@@ -107,13 +107,13 @@ export function Footer() {
         <div className="border-t border-secondary-foreground/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-secondary-foreground/70">
           <p>© {new Date().getFullYear()} CITY ENERGY. Todos los derechos reservados.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-accent transition-colors">
+            <a href="/aviso-de-privacidad" className="hover:text-accent transition-colors">
               Política de privacidad
             </a>
-            <a href="#" className="hover:text-accent transition-colors">
+            <a href="/terminos-y-condiciones" className="hover:text-accent transition-colors">
               Términos y condiciones
             </a>
-            <a href="#" className="hover:text-accent transition-colors">
+            <a href="/aviso-legal" className="hover:text-accent transition-colors">
               Aviso legal
             </a>
           </div>
